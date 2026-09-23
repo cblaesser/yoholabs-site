@@ -5,6 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yoho Labs</title>
 <meta name="description" content="Yoho Labs is an independent product lab for exploring ideas, experimenting with technology, and making things worth using.">
+<link rel="canonical" href="https://yoholabs.co/">
+<meta name="theme-color" content="#0B1B22">
+
+<!-- Link previews: iMessage, Slack, LinkedIn, X — all read Open Graph. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yoho Labs">
+<meta property="og:title" content="Yoho Labs">
+<meta property="og:description" content="An independent product lab for exploring ideas, experimenting with technology, and making things worth using.">
+<meta property="og:url" content="https://yoholabs.co/">
+<meta property="og:image" content="https://yoholabs.co/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yoho Labs">
+<meta name="twitter:description" content="An independent product lab for exploring ideas, experimenting with technology, and making things worth using.">
+<meta name="twitter:image" content="https://yoholabs.co/og-image.png">
+
+<!-- Organization card for Google: name, logo, contact — reads as a real company. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Yoho Labs LLC",
+  "alternateName": "Yoho Labs",
+  "url": "https://yoholabs.co/",
+  "logo": "https://yoholabs.co/favicon-512.png",
+  "email": "hello@yoholabs.co",
+  "slogan": "Curiosity creates a brighter map.",
+  "address": { "@type": "PostalAddress", "addressRegion": "MI", "addressCountry": "US" }
+}
+</script>
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -31,7 +62,10 @@
   header{position:relative}
   .bar{
     display:flex; align-items:center; justify-content:space-between;
-    padding:26px 0;
+    /* padding-block only: this element also carries .wrap, whose horizontal
+       padding a `padding:26px 0` shorthand silently destroyed (found on-device:
+       the header sat flush against the iPhone's screen edge). */
+    padding-block:26px;
   }
   .lockup{display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit}
   .lockup img{width:34px; height:auto; display:block}
@@ -161,6 +195,10 @@
     .card{grid-template-columns:1fr}
     .about-grid{grid-template-columns:1fr}
     nav{gap:16px}
+  }
+  /* The bar's lockup + three nav items outgrow a phone; stacking beats clipping. */
+  @media (max-width:560px){
+    .bar{flex-direction:column; align-items:flex-start; gap:16px; padding-block:22px}
   }
 </style>
 </head>
