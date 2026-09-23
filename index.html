@@ -53,23 +53,52 @@
   nav a:hover{color:var(--yoho-ice)}
 
   /* ── Hero ─────────────────────────────────────────── */
-  .hero{padding:clamp(72px, 12vh, 140px) 0 clamp(72px, 11vh, 130px); position:relative; overflow:hidden}
+  /* Fills the viewport below the header, so the fold is a deliberate dark field —
+     no stray sliver of the next section reading as an unfinished page. */
+  .hero{
+    min-height:calc(100svh - 113px);
+    display:flex; align-items:center;
+    position:relative; overflow:hidden;
+    padding:48px 0 64px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:minmax(0, 7fr) minmax(0, 5fr);
+    align-items:center; gap:clamp(32px, 6vw, 80px); width:100%;
+  }
   .hero-glow{
-    position:absolute; right:-12%; top:-20%; width:60%; aspect-ratio:1;
-    background:radial-gradient(closest-side, rgba(47,113,133,.28), rgba(47,113,133,0) 70%);
+    position:absolute; right:-8%; top:8%; width:56%; aspect-ratio:1;
+    background:radial-gradient(closest-side, rgba(47,113,133,.30), rgba(47,113,133,0) 70%);
     pointer-events:none;
   }
   @media (prefers-reduced-motion: no-preference){
     .hero-glow{animation:drift 14s ease-in-out infinite alternate}
-    @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-6%,5%)}}
+    @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-5%,4%)}}
+    .hero .mark{animation:breathe 12s ease-in-out infinite alternate}
+    @keyframes breathe{from{transform:translateY(0)}to{transform:translateY(-14px)}}
   }
-  .hero .mark{width:clamp(150px, 20vw, 230px); height:auto; display:block; margin-bottom:clamp(36px, 6vh, 64px)}
+  .hero .mark{
+    width:100%; max-width:440px; height:auto; display:block;
+    justify-self:center;
+    filter:drop-shadow(0 24px 60px rgba(95,183,197,.14));
+  }
   h1{
-    font-size:clamp(40px, 6.2vw, 78px); font-weight:500; line-height:1.02;
-    letter-spacing:-.015em; margin:0 0 28px; max-width:15em;
+    font-size:clamp(40px, 5.4vw, 72px); font-weight:500; line-height:1.04;
+    letter-spacing:-.015em; margin:0 0 28px;
   }
   h1 .bright{color:var(--yoho-ice)}
-  .hero p{font-size:clamp(18px, 1.6vw, 21px); color:var(--yoho-mist); max-width:32em; margin:0}
+  .hero-copy p{font-size:clamp(18px, 1.6vw, 21px); color:var(--yoho-mist); max-width:30em; margin:0}
+  .scroll-cue{
+    position:absolute; left:50%; bottom:22px; transform:translateX(-50%);
+    color:var(--yoho-mist); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    text-decoration:none; transition:color .2s ease;
+  }
+  .scroll-cue:hover{color:var(--yoho-ice)}
+  @media (max-width:760px){
+    .hero{min-height:auto; padding:64px 0 72px}
+    .hero-grid{grid-template-columns:1fr}
+    .hero .mark{max-width:230px; justify-self:start; order:-1; margin-bottom:8px}
+    .scroll-cue{display:none}
+  }
 
   /* ── Sections ─────────────────────────────────────── */
   .eyebrow{
@@ -158,12 +187,15 @@
 
 <section class="hero" id="top">
   <div class="hero-glow"></div>
-  <div class="wrap">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 class="reveal in">Curiosity creates<br>a <span class="bright">brighter map.</span></h1>
+      <p class="reveal in">Yoho Labs is an independent product lab for exploring ideas,
+      experimenting with technology, and making things worth using.</p>
+    </div>
     <img class="mark reveal in" src="flow-mark-alpha.png" alt="Yoho Labs flow mark">
-    <h1 class="reveal in">Curiosity creates<br>a <span class="bright">brighter map.</span></h1>
-    <p class="reveal in">Yoho Labs is an independent product lab for exploring ideas,
-    experimenting with technology, and making things worth using.</p>
   </div>
+  <a class="scroll-cue" href="#work">Work ↓</a>
 </section>
 
 <section class="work" id="work">
