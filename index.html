@@ -4,76 +4,218 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yoho Labs</title>
-<meta name="description" content="Yoho Labs LLC is an independent software studio building navigation and travel apps, including RV Maps for iPhone.">
+<meta name="description" content="Yoho Labs is an independent product lab for exploring ideas, experimenting with technology, and making things worth using.">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap">
 <style>
   :root{
-    --paper:#FAFBFC; --ink:#16222E; --ink-soft:#5A6B7A; --line:#E2E8ED;
-    --accent:#2196F3; --accent-deep:#14568F; --card:#FFFFFF;
+    --yoho-ink:#0D1B22; --yoho-slate:#18313D; --yoho-glacial-deep:#2F7185;
+    --yoho-glacial:#5FB7C5; --yoho-ice:#9ADDE0; --yoho-snow:#F4F2EC;
+    --yoho-white:#FFFFFF; --yoho-mist:#9AAAB0;
+    --ink-line:rgba(154,170,176,.18); --snow-line:rgba(13,27,34,.12);
+    --snow-ink:#0D1B22; --snow-mist:#5B6B71;
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height:1.6; font-size:17px;
+    margin:0; background:var(--yoho-ink); color:var(--yoho-white);
+    font-family:"Geist", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:680px; margin:0 auto; padding:0 24px}
-  header{padding:88px 0 40px}
-  .mark{
-    font-size:13px; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--accent-deep); font-weight:600; margin:0 0 14px;
+  .wrap{max-width:1240px; margin:0 auto; padding:0 clamp(24px, 4vw, 48px)}
+
+  /* ── Header ───────────────────────────────────────── */
+  header{position:relative}
+  .bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 0;
   }
-  h1{font-size:clamp(34px,7vw,46px); line-height:1.1; margin:0 0 16px; letter-spacing:-.015em}
-  .dek{font-size:20px; color:var(--ink-soft); margin:0; max-width:34em}
-  section{padding:36px 0; border-top:1px solid var(--line)}
-  h2{font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin:0 0 18px}
-  .product{
-    display:flex; gap:22px; align-items:flex-start;
-    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px;
+  .lockup{display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit}
+  .lockup img{width:34px; height:auto; display:block}
+  .lockup .words{line-height:1.15}
+  .lockup .yoho{
+    display:block; font-weight:300; font-size:17px;
+    letter-spacing:.20em; text-transform:uppercase;
   }
-  .product img{width:84px; height:84px; border-radius:19px; flex-shrink:0}
-  .product h3{margin:2px 0 6px; font-size:21px}
-  .product p{margin:0; color:var(--ink-soft); font-size:16px}
-  .status{
-    display:inline-block; margin-top:12px; font-size:13px; font-weight:600;
-    color:var(--accent-deep); background:#E3F0FB; padding:3px 10px; border-radius:99px;
+  .lockup .labs{
+    display:block; font-weight:400; font-size:10px;
+    letter-spacing:.55em; text-transform:uppercase; color:var(--yoho-mist);
   }
-  a{color:var(--accent-deep)}
-  footer{padding:40px 0 64px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:14px}
-  @media (max-width:480px){ .product{flex-direction:column} }
+  nav{display:flex; gap:clamp(18px, 3vw, 36px)}
+  nav a{
+    color:var(--yoho-mist); text-decoration:none;
+    font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+    transition:color .2s ease;
+  }
+  nav a:hover{color:var(--yoho-ice)}
+
+  /* ── Hero ─────────────────────────────────────────── */
+  .hero{padding:clamp(72px, 12vh, 140px) 0 clamp(72px, 11vh, 130px); position:relative; overflow:hidden}
+  .hero-glow{
+    position:absolute; right:-12%; top:-20%; width:60%; aspect-ratio:1;
+    background:radial-gradient(closest-side, rgba(47,113,133,.28), rgba(47,113,133,0) 70%);
+    pointer-events:none;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero-glow{animation:drift 14s ease-in-out infinite alternate}
+    @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-6%,5%)}}
+  }
+  .hero .mark{width:clamp(150px, 20vw, 230px); height:auto; display:block; margin-bottom:clamp(36px, 6vh, 64px)}
+  h1{
+    font-size:clamp(40px, 6.2vw, 78px); font-weight:500; line-height:1.02;
+    letter-spacing:-.015em; margin:0 0 28px; max-width:15em;
+  }
+  h1 .bright{color:var(--yoho-ice)}
+  .hero p{font-size:clamp(18px, 1.6vw, 21px); color:var(--yoho-mist); max-width:32em; margin:0}
+
+  /* ── Sections ─────────────────────────────────────── */
+  .eyebrow{
+    font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--yoho-glacial); margin:0 0 34px; font-weight:500;
+  }
+  .rule{border:none; border-top:1px solid var(--ink-line); margin:0}
+
+  /* Work — snowfield field for contrast */
+  .work{background:var(--yoho-snow); color:var(--snow-ink); padding:clamp(64px, 10vh, 110px) 0}
+  .work .eyebrow{color:var(--yoho-glacial-deep)}
+  .card{
+    display:grid; grid-template-columns:120px 1fr; gap:clamp(24px, 4vw, 44px);
+    align-items:center;
+    background:var(--yoho-white); border:1px solid var(--snow-line); border-radius:12px;
+    padding:clamp(26px, 4vw, 44px);
+  }
+  .card img{width:120px; height:120px; border-radius:27px; display:block}
+  .card h3{margin:0 0 10px; font-size:clamp(22px, 2.4vw, 28px); font-weight:600; letter-spacing:-.01em}
+  .card p{margin:0; color:var(--snow-mist); font-size:17px; max-width:44em}
+  .card .meta{
+    margin-top:16px; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--yoho-glacial-deep); font-weight:500;
+  }
+  .next{
+    margin:26px 4px 0; color:var(--snow-mist); font-size:14px;
+    letter-spacing:.04em;
+  }
+
+  /* About + contact — back on ink */
+  .about{padding:clamp(64px, 10vh, 110px) 0}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px, 6vw, 96px)}
+  .about p{margin:0 0 18px; color:var(--yoho-mist); font-size:18px; max-width:30em}
+  .about p:last-child{margin-bottom:0}
+  .about strong{color:var(--yoho-white); font-weight:500}
+  .contact-line{font-size:18px}
+  .contact-line a{
+    color:var(--yoho-glacial); text-decoration:none; border-bottom:1px solid rgba(95,183,197,.45);
+    padding-bottom:2px; transition:color .2s ease, border-color .2s ease;
+  }
+  .contact-line a:hover{color:var(--yoho-ice); border-color:var(--yoho-ice)}
+
+  /* ── Footer ───────────────────────────────────────── */
+  footer{border-top:1px solid var(--ink-line); padding:40px 0 64px}
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap;
+  }
+  footer .left{display:flex; align-items:center; gap:12px; color:var(--yoho-mist); font-size:14px}
+  footer img{width:22px; height:auto; opacity:.9}
+  footer .tag{
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--yoho-mist);
+  }
+
+  /* Soft reveal on scroll */
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1; transform:none}
+  }
+  a:focus-visible{outline:2px solid var(--yoho-glacial); outline-offset:4px; border-radius:2px}
+  @media (max-width:640px){
+    .card{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr}
+    nav{gap:16px}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <p class="mark">Yoho Labs</p>
-    <h1>Software for the road less traveled.</h1>
-    <p class="dek">Yoho Labs LLC is an independent software studio building navigation
-    and travel apps for people who take the scenic route.</p>
-  </header>
 
-  <section>
-    <h2>What we're building</h2>
-    <div class="product">
-      <img src="rvmaps-icon.png" alt="RV Maps app icon — a motorhome on a mountain road" width="84" height="84">
+<header>
+  <div class="wrap bar">
+    <a class="lockup" href="#top">
+      <img src="flow-mark-alpha.png" alt="">
+      <span class="words">
+        <span class="yoho">Yoho</span>
+        <span class="labs">Labs</span>
+      </span>
+    </a>
+    <nav aria-label="Site">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <hr class="rule">
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <img class="mark reveal in" src="flow-mark-alpha.png" alt="Yoho Labs flow mark">
+    <h1 class="reveal in">Curiosity creates<br>a <span class="bright">brighter map.</span></h1>
+    <p class="reveal in">Yoho Labs is an independent product lab for exploring ideas,
+    experimenting with technology, and making things worth using.</p>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <p class="eyebrow reveal">Selected work</p>
+    <div class="card reveal">
+      <img src="rvmaps-icon.png" alt="RV Maps app icon" width="120" height="120">
       <div>
         <h3>RV Maps</h3>
-        <p>Navigation built for RVs: routes that respect your rig's height, weight and
-        clearance, warn about unpaved roads, and keep working where the signal doesn't.
-        Trip planning, weather along your route, and campground discovery — designed
-        around how RV travel actually works.</p>
-        <span class="status">In development — coming to the App Store</span>
+        <p>Navigation for people whose vehicle is also their home. Routes that
+        respect a rig's real limits, honest warnings about the road ahead, and
+        planning that works where the signal doesn't.</p>
+        <p class="meta">iOS · In development</p>
       </div>
     </div>
-  </section>
+    <p class="next reveal">More experiments in progress — the interesting ones will show up here.</p>
+  </div>
+</section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Questions, partnerships, or support: <a href="mailto:hello@yoholabs.co">hello@yoholabs.co</a></p>
-  </section>
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <p class="eyebrow">About</p>
+      <p><strong>We follow interesting problems.</strong> Some become products,
+      some become experiments, all of them teach us something. The lab exists
+      to notice what could be better and to build it carefully.</p>
+      <p>Small team, long attention span, Michigan roots.</p>
+    </div>
+    <div class="reveal" id="contact">
+      <p class="eyebrow">Contact</p>
+      <p class="contact-line">Ideas, questions, collaborations —<br>
+      <a href="mailto:hello@yoholabs.co">hello@yoholabs.co</a></p>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    © 2026 Yoho Labs LLC · Michigan, USA
-  </footer>
-</div>
+<footer>
+  <div class="wrap">
+    <span class="left">
+      <img src="flow-mark-alpha.png" alt="">
+      <span>© 2026 Yoho Labs LLC</span>
+    </span>
+    <span class="tag">Curiosity creates a brighter map</span>
+  </div>
+</footer>
+
+<script>
+  // Soft reveal on scroll; no-ops under reduced motion (CSS gates the transition).
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }, { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
+</script>
 </body>
 </html>
