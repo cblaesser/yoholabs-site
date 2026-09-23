@@ -187,8 +187,10 @@
     font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--yoho-mist);
   }
 
-  /* Soft reveal on scroll */
-  @media (prefers-reduced-motion: no-preference){
+  /* Soft reveal on scroll — DESKTOP ONLY. On phones the content simply exists:
+     recorded on the simulator, landing on an anchor mid-reveal shows the whole
+     section as a washed-out ghost fading in for 600 ms — the reported flicker. */
+  @media (prefers-reduced-motion: no-preference) and (min-width:761px){
     .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
     .reveal.in{opacity:1; transform:none}
   }
@@ -293,7 +295,11 @@
   // everything instantly and let the scroll travel through finished content.
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener("click", () => {
-      document.querySelectorAll(".reveal").forEach(el => { io.unobserve(el); el.classList.add("in"); });
+      document.querySelectorAll(".reveal").forEach(el => {
+        io.unobserve(el);
+        el.style.transition = "none";   // settle NOW, not over 600ms
+        el.classList.add("in");
+      });
     });
   });
 </script>
