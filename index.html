@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yoho Labs</title>
+<meta name="description" content="Yoho Labs LLC is an independent software studio building navigation and travel apps, including RV Maps for iPhone.">
+<style>
+  :root{
+    --paper:#FAFBFC; --ink:#16222E; --ink-soft:#5A6B7A; --line:#E2E8ED;
+    --accent:#2196F3; --accent-deep:#14568F; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height:1.6; font-size:17px;
+  }
+  .wrap{max-width:680px; margin:0 auto; padding:0 24px}
+  header{padding:88px 0 40px}
+  .mark{
+    font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--accent-deep); font-weight:600; margin:0 0 14px;
+  }
+  h1{font-size:clamp(34px,7vw,46px); line-height:1.1; margin:0 0 16px; letter-spacing:-.015em}
+  .dek{font-size:20px; color:var(--ink-soft); margin:0; max-width:34em}
+  section{padding:36px 0; border-top:1px solid var(--line)}
+  h2{font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin:0 0 18px}
+  .product{
+    display:flex; gap:22px; align-items:flex-start;
+    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px;
+  }
+  .product img{width:84px; height:84px; border-radius:19px; flex-shrink:0}
+  .product h3{margin:2px 0 6px; font-size:21px}
+  .product p{margin:0; color:var(--ink-soft); font-size:16px}
+  .status{
+    display:inline-block; margin-top:12px; font-size:13px; font-weight:600;
+    color:var(--accent-deep); background:#E3F0FB; padding:3px 10px; border-radius:99px;
+  }
+  a{color:var(--accent-deep)}
+  footer{padding:40px 0 64px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:14px}
+  @media (max-width:480px){ .product{flex-direction:column} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="mark">Yoho Labs</p>
+    <h1>Software for the road less traveled.</h1>
+    <p class="dek">Yoho Labs LLC is an independent software studio building navigation
+    and travel apps for people who take the scenic route.</p>
+  </header>
+
+  <section>
+    <h2>What we're building</h2>
+    <div class="product">
+      <img src="rvmaps-icon.png" alt="RV Maps app icon — a motorhome on a mountain road" width="84" height="84">
+      <div>
+        <h3>RV Maps</h3>
+        <p>Navigation built for RVs: routes that respect your rig's height, weight and
+        clearance, warn about unpaved roads, and keep working where the signal doesn't.
+        Trip planning, weather along your route, and campground discovery — designed
+        around how RV travel actually works.</p>
+        <span class="status">In development — coming to the App Store</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions, partnerships, or support: <a href="mailto:hello@yoholabs.co">hello@yoholabs.co</a></p>
+  </section>
+
+  <footer>
+    © 2026 Yoho Labs LLC · Michigan, USA
+  </footer>
+</div>
+</body>
+</html>
