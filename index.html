@@ -243,7 +243,7 @@
   <div class="wrap">
     <p class="eyebrow reveal">Selected work</p>
     <div class="card reveal">
-      <img src="rvmaps-icon.png" alt="RV Maps app icon" width="120" height="120">
+      <img src="rvmaps-icon-360.png" alt="RV Maps app icon" width="120" height="120" decoding="sync">
       <div>
         <h3>RV Maps</h3>
         <p>Navigation for people whose vehicle is also their home. Routes that
@@ -289,18 +289,45 @@
   }, { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
 
-  // Direct navigation must not fight the reveal effect: a smooth scroll past
-  // several sections fires every reveal transition mid-flight, which on iOS is
-  // a repaint storm — reported as bad flicker. On any in-page link, settle
-  // everything instantly and let the scroll travel through finished content.
+  // Anchor navigation: JS-driven scroll with easing. Native CSS smooth-scroll
+  // is what janked on iOS (the collapsing toolbar resizes the viewport
+  // mid-animation and WebKit restarts the travel); driving scrollTo from
+  // requestAnimationFrame is deterministic on every browser. Reveals settle
+  // instantly first so the travel passes finished content.
+  const easing = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener("click", () => {
+    a.addEventListener("click", e => {
+      const target = document.querySelector(a.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
       document.querySelectorAll(".reveal").forEach(el => {
         io.unobserve(el);
-        el.style.transition = "none";   // settle NOW, not over 600ms
+        el.style.transition = "none";
         el.classList.add("in");
       });
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        target.scrollIntoView();
+        return;
+      }
+      const from = window.scrollY;
+      const to = target.getBoundingClientRect().top + from - 8;
+      const dur = Math.min(750, 300 + Math.abs(to - from) * 0.22);
+      let t0;
+      const step = ts => {
+        if (t0 === undefined) t0 = ts;
+        const p = Math.min(1, (ts - t0) / dur);
+        window.scrollTo(0, from + (to - from) * easing(p));
+        if (p < 1) requestAnimationFrame(step);
+        else history.pushState(null, "", a.getAttribute("href"));
+      };
+      requestAnimationFrame(step);
     });
+  });
+
+  // Decode every image up front: iOS rasterizes off-screen images lazily, so
+  // the RV Maps icon popped in a beat after arriving at the Work section.
+  addEventListener("load", () => {
+    document.querySelectorAll("img").forEach(i => i.decode && i.decode().catch(() => {}));
   });
 </script>
 </body>
