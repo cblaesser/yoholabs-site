@@ -284,6 +284,16 @@
     for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
   }, { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
+
+  // Direct navigation must not fight the reveal effect: a smooth scroll past
+  // several sections fires every reveal transition mid-flight, which on iOS is
+  // a repaint storm — reported as bad flicker. On any in-page link, settle
+  // everything instantly and let the scroll travel through finished content.
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", () => {
+      document.querySelectorAll(".reveal").forEach(el => { io.unobserve(el); el.classList.add("in"); });
+    });
+  });
 </script>
 </body>
 </html>
